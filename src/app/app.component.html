@@ -1,20 +1,60 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<!-- <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+</div> -->
 
+<table class="table">
+  <thead>
+    <tr style="display: flex">
+      <th style="flex: 0.07;">#</th>
+      <th style="flex: 0.5;">Title</th>
+      <th style="flex: 1;">Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+    </tr> -->
+
+    <cdk-virtual-scroll-viewport *ngIf="ready" style="flex-grow: 1" itemSize="10">
+
+      <!-- style="border: 1px solid cornflowerblue; padding: 5px; margin: 10px 0" -->
+      <ng-container *cdkVirtualFor="let data of largeDataSet; let i = index">
+        <!-- {{i}} - {{data | json}} -->
+
+        <tr style="display: flex">
+          <th scope="row" style="flex: 0.07;">
+            {{i}}
+          </th>
+          <td style="flex: 0.5;">
+            <!-- pattern="^[1-9]+[0-9]*$" -->
+            <input class="form-control" type="text" [(ngModel)]="data.title" placeholder="Title" #title="ngModel" required>
+            <div [hidden]="title.valid" class="alert alert-danger">
+              Invalid Values
+            </div>
+            <!-- {{ data.title }} -->
+          </td>
+          <td style="flex: 1;">
+            <input class="form-control" type="text" [(ngModel)]="data.body" placeholder="Body" #body="ngModel" required>
+            <div [hidden]="body.valid || body.pristine" class="alert alert-danger">
+              body is required
+            </div>
+            <!-- {{ data.body }} -->
+          </td>
+        </tr>
+
+      </ng-container>
+
+    </cdk-virtual-scroll-viewport>
+  </tbody>
+</table>
